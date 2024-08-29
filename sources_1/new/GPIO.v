@@ -35,7 +35,22 @@ module GPIO(
     assign rdata = regGpio[addr[3:2]];
     
     // Added after thinking
-    assign IDR[0] = MODER[0] ? 1'bz : ioport[0];
+
+    always @(posedge clk ) begin
+    // assign IDR[0] = MODER[0] ? 1'bz : ioport[0]; // 수정
+        if(reset) begin
+            regGpio[1] <= 0; // IDR
+        end else begin
+            if(~MODER[0]) regGpio[1][0] <= ioport[0]; //IDR
+            if(~MODER[1]) regGpio[1][1] <= ioport[1]; //IDR
+            if(~MODER[2]) regGpio[1][2] <= ioport[2]; //IDR
+            if(~MODER[3]) regGpio[1][3] <= ioport[3]; //IDR
+            if(~MODER[4]) regGpio[1][4] <= ioport[4]; //IDR
+            if(~MODER[5]) regGpio[1][5] <= ioport[5]; //IDR
+            if(~MODER[6]) regGpio[1][6] <= ioport[6]; //IDR
+            if(~MODER[7]) regGpio[1][7] <= ioport[7]; //IDR
+        end
+    end
 
     assign ioport[0] = MODER[0] ? ODR[0] : ioport[0];
     assign ioport[1] = MODER[1] ? ODR[1] : ioport[1];
@@ -45,6 +60,5 @@ module GPIO(
     assign ioport[5] = MODER[3] ? ODR[5] : ioport[5];
     assign ioport[6] = MODER[6] ? ODR[6] : ioport[6];
     assign ioport[7] = MODER[7] ? ODR[7] : ioport[7];
-
 
 endmodule

@@ -8,10 +8,11 @@ module ROM (
     reg [31:0] rom[0:63];
 
     initial begin
-        //rom[x] = 32'b_func7 _rs2  _rs1  _f3 _rd   _opcode; //ADD rd  rs1 rs2
-        rom[0] = 32'h400007b7;
-        rom[1] = 32'h0ff00713;
-        rom[2] = 32'h00e7a023;
+      $readmemh("code.mem",rom); // readmemh에서 h는 hex를 의미   
+      //rom[x] = 32'b_func7 _rs2  _rs1  _f3 _rd   _opcode; //ADD rd  rs1 rs2
+        // rom[0] = 32'h400007b7;
+        // rom[1] = 32'h0ff00713;
+        // rom[2] = 32'h00e7a023;
         //R-type test
           // rom[0] = 32'b0000000_00001_00010_000_00110_0110011; //ADD x6 x2 x1 -> 6+3 =9
           // rom[1] = 32'b0100000_00001_00010_000_00111_0110011; //SUB x7 x2 x1 -> 6-3 =3

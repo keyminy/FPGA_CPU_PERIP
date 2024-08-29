@@ -4,14 +4,15 @@ module RISCV_MCU(
         input        clk,
         input        reset,
         input  [7:0] GPIB,
-        output [7:0] GPOA
+        output [7:0] GPOA,
+        input [7:0]  GPIOC
     );
     wire [31:0] instrData, instrAddr;
     wire [31:0] DRdData, DWrData, DAddr;
     wire        DWe;
     wire [1:0]  BHW;
-    wire [2:0]  w_addrSel;
-    wire [31:0] w_ramRdData, w_gpoRdData, w_gpiRdData;
+    wire [3:0]  w_addrSel;
+    wire [31:0] w_ramRdData, w_gpoRdData, w_gpiRdData,w_gpioRdData;
 
     RV32I_Core U_MCU(
         .clk        (clk),
@@ -70,6 +71,17 @@ module RISCV_MCU(
     .rdata(w_gpiRdData) 
     );
 
+    GPIO U_GPIO(
+    .clk(clk),
+    .reset(reset),
+    .wr(DWe),
+    .cs(w_addrSel[3]),
+    .addr(DAddr), // 없어도됨
+    .wdata(DWrData), 
+    .ioport(GPIOC), 
+    .rdata(w_gpioRdData)
+    );
+
     ROM U_ROM(
         .addr       (instrAddr),
         .data       (instrData)
@@ -78,16 +90,16 @@ endmodule
 
 module addrDecoder (
     input [31:0]     DAddr,
-    output reg [2:0] sel
+    output reg [3:0] sel
 );
     always @(*) begin
         casex (DAddr)
             // 32'h2000_00xx: sel = 2'b01; // RAM
-            32'h2000_02xx: sel = 3'b001; // RAM
-            32'h4000_00xx: sel = 3'b010; // GPO
-            32'h4000_01xx: sel = 3'b100; // GPI
-            // 32'h4000_02xx: sel = 3'b1000; // GPIO
-            default:  sel = 3'bxx;
+            32'h2000_02xx: sel = 4'b0001; // RAM
+            32'h4000_00xx: sel = 4'b0010; // GPO
+            32'h4000_01xx: sel = 4'b0100; // GPI
+            32'h4000_02xx: sel = 4'b1000; // GPIO
+            default:  sel = 4'bxx;
         endcase
     end    
 endmodule
@@ -97,6 +109,7 @@ module addrMux (
     input [31:0]        a,
     input [31:0]        b,
     input [31:0]        c,
+    input [31:0]        d,
     output reg [31:0]   y
 );
     always @(*) begin
@@ -105,7 +118,7 @@ module addrMux (
             32'h2000_02xx: y = a; // RAM
             32'h4000_00xx: y = b; // GPO
             32'h4000_01xx: y = c; // GPI
-            // 32'h4000_02xx: y = d; // GPIO
+            32'h4000_02xx: y = d; // GPIO
             default:  y = 32'bx;
         endcase
     end    

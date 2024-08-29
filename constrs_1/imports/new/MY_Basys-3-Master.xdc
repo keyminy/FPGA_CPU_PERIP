@@ -23,10 +23,10 @@ set_property -dict { PACKAGE_PIN W13  IOSTANDARD LVCMOS33 } [get_ports { GPIB[7]
 # set_property -dict { PACKAGE_PIN T3   IOSTANDARD LVCMOS33 } [get_ports { b[1] }]; #IO_L2N_T0_34               ,Sch=SW9
 # set_property -dict { PACKAGE_PIN T2   IOSTANDARD LVCMOS33 } [get_ports { b[2] }]; #IO_L1N_T0_34               ,Sch=SW10
 # set_property -dict { PACKAGE_PIN R3   IOSTANDARD LVCMOS33 } [get_ports { b[3] }]; #IO_L2P_T0_34               ,Sch=SW11
-# set_property -dict { PACKAGE_PIN W2   IOSTANDARD LVCMOS33 } [get_ports { b[4] }]; #IO_L5N_T0_34               ,Sch=SW12
-# set_property -dict { PACKAGE_PIN U1   IOSTANDARD LVCMOS33 } [get_ports { b[5] }]; #IO_L3N_T0_DQS_34           ,Sch=SW13
-# set_property -dict { PACKAGE_PIN T1   IOSTANDARD LVCMOS33 } [get_ports { b[6] }]; #IO_L3P_T0_DQS_34           ,Sch=SW14
-# set_property -dict { PACKAGE_PIN R2   IOSTANDARD LVCMOS33 } [get_ports { b[7] }]; #IO_L1P_T0_34               ,Sch=SW15
+set_property -dict { PACKAGE_PIN W2   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[0] }]; #IO_L5N_T0_34               ,Sch=SW12
+set_property -dict { PACKAGE_PIN U1   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[1] }]; #IO_L3N_T0_DQS_34           ,Sch=SW13
+set_property -dict { PACKAGE_PIN T1   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[2] }]; #IO_L3P_T0_DQS_34           ,Sch=SW14
+set_property -dict { PACKAGE_PIN R2   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[3] }]; #IO_L1P_T0_34               ,Sch=SW15
 
 
 ## LEDs
@@ -43,10 +43,10 @@ set_property -dict { PACKAGE_PIN V14  IOSTANDARD LVCMOS33 } [get_ports { GPOA[7]
 #set_property -dict { PACKAGE_PIN V3   IOSTANDARD LVCMOS33 } [get_ports { led[9]  }]; #IO_L6P_T0_34                 ,Sch=LED9
 #set_property -dict { PACKAGE_PIN W3   IOSTANDARD LVCMOS33 } [get_ports { led[10] }]; #IO_L6N_T0_VREF_34            ,Sch=LED10
 #set_property -dict { PACKAGE_PIN U3   IOSTANDARD LVCMOS33 } [get_ports { led[11] }]; #IO_L9P_T1_DQS_34             ,Sch=LED11
-#set_property -dict { PACKAGE_PIN P3   IOSTANDARD LVCMOS33 } [get_ports { led[12] }]; #IO_L12N_T1_MRCC_35           ,Sch=LED12
-#set_property -dict { PACKAGE_PIN N3   IOSTANDARD LVCMOS33 } [get_ports { led[13] }]; #IO_L12P_T1_MRCC_35           ,Sch=LED13
-#set_property -dict { PACKAGE_PIN P1   IOSTANDARD LVCMOS33 } [get_ports { led[14] }]; #IO_L19N_T3_VREF_35           ,Sch=LED14
-#set_property -dict { PACKAGE_PIN L1   IOSTANDARD LVCMOS33 } [get_ports { led[15] }]; #IO_L6N_T0_VREF_35            ,Sch=LED15
+set_property -dict { PACKAGE_PIN P3   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[4] }]; #IO_L12N_T1_MRCC_35           ,Sch=LED12
+set_property -dict { PACKAGE_PIN N3   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[5] }]; #IO_L12P_T1_MRCC_35           ,Sch=LED13
+set_property -dict { PACKAGE_PIN P1   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[6] }]; #IO_L19N_T3_VREF_35           ,Sch=LED14
+set_property -dict { PACKAGE_PIN L1   IOSTANDARD LVCMOS33 } [get_ports { GPIOC[7] }]; #IO_L6N_T0_VREF_35            ,Sch=LED15
 
 
 ##7 segment display
